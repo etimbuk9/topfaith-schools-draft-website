@@ -11,6 +11,9 @@ check('"Why": {"id": "why"' in s, "ROUTES entry missing")
 check('<option value="why">' in s, "Jump-to option missing")
 check(re.search(r'<a href="Why\.dc\.html" style="color: #B9C3CB[^>]*>Why Topfaith</a>', s), "footer link missing")
 check(re.search(r'<a href="Why\.dc\.html"[^>]*>Read all 25</a>', s), '"Read all 25" not pointing at Why')
+tpl = s[s.find('id="tpl-Why"'):s.find('</template>', s.find('id="tpl-Why"'))]
+for phrase in ('families tell us', 'sit in on a lesson'):
+    check(phrase not in tpl, f'invented claim present: {phrase}')
 check('1:7' not in s, "1:7 ratio still present")
 m = re.search(r'REG\["Why"\] = \(function\(\)\{(.*?)return Component;\}\)\(\);', s, re.S)
 check(m, 'REG["Why"] missing')
