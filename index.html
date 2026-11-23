@@ -773,7 +773,7 @@ Topfaith, we adore you.</p>
           <label for="vemail" style="font-size: 13px; font-weight: 700">Email address</label>
           <input id="vemail" type="email" autocomplete="email" style="font-family: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid #9FB4C0; min-height: 48px">
           <label for="vclass" style="font-size: 13px; font-weight: 700">Class your child would enter</label>
-          <select id="vclass" style="font-family: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid #9FB4C0; min-height: 48px; background: #FFFFFF"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option></select>
+          <select id="vclass" style="font-family: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid #9FB4C0; min-height: 48px; background: #FFFFFF"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option></select>
           <button type="button" onClick="{{ send }}" style="font-family: inherit; margin-top: 6px; background: #FFD400; color: #12100D; border: 0; font-weight: 700; font-size: 16px; padding: 15px 24px; min-height: 50px; cursor: pointer">Request a visit</button>
         </div>
       </template>
@@ -2170,8 +2170,8 @@ class Component extends DCLogic {
     on.agree = (e) => update({ agree: !!e.target.checked });
 
     const schools = [
-      { id: 'international', name: 'Topfaith International', sub: 'JSS1 – SS3 · full boarding · Mkpatak', classes: ['JSS1', 'JSS2', 'JSS3', 'SS1', 'SS2'], note: 'Entry above JSS1 is by transfer, subject to space.' },
-      { id: 'legacy', name: 'Topfaith Legacy College', sub: 'JSS1 – SS3 · day · Ikot Ekpene', classes: ['JSS1', 'JSS2', 'JSS3', 'SS1', 'SS2'], note: 'Entry above JSS1 is by transfer, subject to space.' },
+      { id: 'international', name: 'Topfaith International', sub: 'JSS1 – SS3 · full boarding · Mkpatak', classes: ['JSS1', 'JSS2', 'JSS3', 'SS1', 'SS2', 'SS3'], note: 'Entry above JSS1 is by transfer, subject to space.' },
+      { id: 'legacy', name: 'Topfaith Legacy College', sub: 'JSS1 – SS3 · day · Ikot Ekpene', classes: ['JSS1', 'JSS2', 'JSS3', 'SS1', 'SS2', 'SS3'], note: 'Entry above JSS1 is by transfer, subject to space.' },
       { id: 'montessori', name: 'Topfaith Montessori', sub: 'Creche – Primary 6 · day · Mkpatak', classes: ['Creche', 'Nursery 1', 'Nursery 2', 'Primary 1', 'Primary 2', 'Primary 3', 'Primary 4', 'Primary 5', 'Primary 6'], note: 'Younger children have a short play-based assessment rather than the online exam.' },
       { id: 'iufp', name: 'IUFP · Foundation year', sub: 'One year, pre-degree · Mkpatak', classes: ['Foundation year'], note: 'Open to Topfaith SS3 students and to applicants from other schools.' }
     ];
