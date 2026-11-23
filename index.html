@@ -92,7 +92,7 @@ img{max-width:100%}
       </div>
       <nav aria-label="About" style="display: flex; flex-direction: column; gap: 8px">
         <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FFD400; margin-bottom: 6px">About</span>
-        <a href="About.dc.html" style="color: #B9C3CB; text-decoration: none">Our story</a>
+        <a href="About.dc.html#history" style="color: #B9C3CB; text-decoration: none">Our story</a>
         <a href="About.dc.html" style="color: #B9C3CB; text-decoration: none">Board of Governors</a>
         <a href="About.dc.html" style="color: #B9C3CB; text-decoration: none">School management</a>
         <a href="Anthem.dc.html" style="color: #B9C3CB; text-decoration: none">Anthem &amp; pledge</a>
@@ -432,13 +432,28 @@ img{max-width:100%}
 
 <nav aria-label="On this page" style="background: #FFFFFF; border-bottom: 1px solid #CEDCE6">
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 4px 28px; font-size: 14.5px; font-weight: 600">
-    <a href="#story" style="text-decoration: none; padding: 16px 0">Our story</a>
+    <a href="#history" style="text-decoration: none; padding: 16px 0">History &amp; philosophy</a>
+    <a href="#story" style="text-decoration: none; padding: 16px 0">Milestones</a>
     <a href="#values" style="text-decoration: none; padding: 16px 0">What we stand for</a>
     <a href="#board" style="text-decoration: none; padding: 16px 0">Board of Governors</a>
     <a href="#management" style="text-decoration: none; padding: 16px 0">School management</a>
   </div>
 </nav>
 
+
+<section id="history" style="max-width: 1200px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: flex-start">
+  <div style="flex: 1 1 280px; min-width: 0">
+    <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A00; margin: 0 0 12px">Our story</p>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 28px">History and philosophy</h2>
+    <address style="font-style: normal; font-size: 15px; line-height: 1.6; color: #3E4A52; border-left: 4px solid #FFD400; padding: 4px 0 4px 18px">Topfaith International Secondary School<br>Mkpatak, Essien Udim<br>Akwa Ibom State, Nigeria<br>530113</address>
+  </div>
+  <div style="flex: 2 1 560px; min-width: 0; max-width: 42em; font-size: 18px; line-height: 1.7; color: #2A3640">
+    <p style="margin: 0 0 22px">Topfaith International Secondary School is located in Mkpatak, Essien Udim, Akwa Ibom State, Nigeria. It is a serene and conducive environment about 12km from Abak town, 14km from Ikot Ekpene town and about 23km from Uyo, the Capital City of Akwa Ibom State. Precisely, it is located at Topfaith International Secondary School, 530113, Mkpatak, Akwa Ibom, Nigeria.</p>
+    <p style="margin: 0 0 22px">The School is premised on the philosophy that for many parents and guardians, the choice of a school for their wards is a very important decision to be made as a School system can make or mar a child's future. Every parent dreams of a successful, prosperous, and self-fulfilling future for his/her ward. More often than not, the realization of such a dream is directly linked to the initial orientation to which the child has been exposed in his/her childhood education.</p>
+    <p style="margin: 0 0 22px">Topfaith International Secondary School is therefore a strategic response to the yearning need for qualitative early childhood education in Nigeria. For each student, the School undertakes to provide a wealth of learning opportunities for educational experience and enrichment. The School fosters and encourages the qualities of initiative, imagination and independence, associated with self-discipline and responsible behaviour. The disciplinary code is premised on fairness, friendliness and firmness.</p>
+    <p style="margin: 0">Invariably the school is an environment for the children to learn and develop faith in themselves, in our country - Nigeria, and humanity in general. Being conscious of and in conformity with the Nigerian National Policy on Education, our children are taught to develop their brains, hands and spirit to create room for intellectual, emotional, social and moral growth. Faith and conviction in the Almighty Creator as the Enabler and Provider of Knowledge and as the overall Regulator of human activities is identified and emphasized in the children's daily life in and outside the school.</p>
+  </div>
+</section>
 
 <section id="story" style="background: #062F4A; color: #FFFFFF">
   <div style="max-width: 1200px; margin: 0 auto; padding: 88px 24px">
@@ -1623,6 +1638,7 @@ function renderPage(){
   }
 }
 function nameForId(id){ for (const k in ROUTES) if (ROUTES[k].id === id) return k; return 'Main'; }
+let pendingAnchor = null;
 function show(name){
   if (!current || current.name !== name){
     const inst = new REG[name](); inst.props = {}; inst.state = inst.state || {};
@@ -1631,7 +1647,9 @@ function show(name){
   document.title = ROUTES[name].title;
   renderPage();
   const sel = document.getElementById('pageJump'); if (sel) sel.value = ROUTES[name].id;
-  window.scrollTo(0, 0);
+  const t = pendingAnchor && document.getElementById(pendingAnchor);
+  pendingAnchor = null;
+  if (t) t.scrollIntoView({ block: 'start' }); else window.scrollTo(0, 0);
 }
 function go(name){
   const id = ROUTES[name].id;
@@ -1640,8 +1658,8 @@ function go(name){
 document.addEventListener('click', (e) => {
   const a = e.target.closest && e.target.closest('a'); if (!a) return;
   const h = a.getAttribute('href') || '';
-  const m = h.match(/^([A-Za-z]+)\.dc\.html$/);
-  if (m && ROUTES[m[1]]){ e.preventDefault(); go(m[1]); return; }
+  const m = h.match(/^([A-Za-z]+)\.dc\.html(?:#([\w-]+))?$/);
+  if (m && ROUTES[m[1]]){ e.preventDefault(); pendingAnchor = m[2] || null; go(m[1]); return; }
   if (h.length > 1 && h[0] === '#'){
     const t = document.getElementById(h.slice(1));
     if (t){ e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
