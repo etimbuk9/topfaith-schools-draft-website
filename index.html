@@ -1284,7 +1284,7 @@ Topfaith, we adore you.</p>
 <section style="background: #0079AF; color: #FFFFFF">
   <div style="max-width: 1200px; margin: 0 auto; padding: 88px 24px">
     <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #FFD400; margin: 0 0 12px">Road to 2027</p>
-    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 36px">Four quarters, two signature events each.</h2>
+    <h2 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 36px">Four quarters, one signature event each.</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px">
       <template data-sc="for" list="{{ quarters }}" as="q" hint-placeholder-count="4">
         <div style="background: #FFFFFF; color: #12100D; padding: 24px">
@@ -1294,7 +1294,6 @@ Topfaith, we adore you.</p>
           </div>
           <div style="font-size: 13px; color: #57646E; margin-top: 2px">{{ q.when }}</div>
           <div style="border-top: 1px solid #CEDCE6; margin-top: 14px; padding-top: 12px; font-weight: 600">{{ q.e1 }}</div>
-          <div style="border-top: 1px solid #CEDCE6; margin-top: 10px; padding-top: 10px; font-weight: 600">{{ q.e2 }}</div>
         </div>
       </template>
     </div>
@@ -2310,10 +2309,10 @@ class Component extends DCLogic {
     const finale = new Date('2027-09-28T09:00:00+01:00').getTime();
     const daysLeft = Math.max(0, Math.ceil((finale - Date.now()) / 86400000));
     const quarters = [
-      { label: 'Q1', when: 'From September 2026', e1: 'Groundbreaking: arena and covered stand', e2: '[Signature event]', now: true },
-      { label: 'Q2', when: '[Months]', e1: '[Signature event]', e2: '[Signature event]', now: false },
-      { label: 'Q3', when: '[Months]', e1: '[Signature event]', e2: '[Signature event]', now: false },
-      { label: 'Q4', when: '[Months]', e1: '[Signature event]', e2: '[Signature event]', now: false }
+      { label: 'Q1', when: 'From September 2026', e1: 'Groundbreaking: arena and covered stand', now: true },
+      { label: 'Q2', when: '[Months]', e1: '[Signature event]', now: false },
+      { label: 'Q3', when: '[Months]', e1: '[Signature event]', now: false },
+      { label: 'Q4', when: '[Months]', e1: '[Signature event]', now: false }
     ];
     const committee = [
       { role: 'Chairman', name: 'Prof. Okon A. Ansa' },
